@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { StarRating } from "@/components/star-rating";
 import { ButtonLink } from "@/components/ui/button";
@@ -34,9 +35,26 @@ export function FunnelLanding({ book }: { book: BookType }) {
             </div>
           </div>
           <div
-            className={`animate-float flex aspect-square items-center justify-center rounded-[2.5rem] ${accentBg[book.accent]} text-[8rem]`}
+            className={`animate-float book-shadow relative flex aspect-square items-center justify-center overflow-hidden rounded-[2.5rem] ${accentBg[book.accent]} text-[8rem]`}
           >
-            {book.heroEmoji}
+            {book.heroImageSrc ? (
+              // Decorative — the heading/blurb beside it already carries
+              // the page's content, so an empty alt avoids screen readers
+              // announcing a claim about the image (e.g. "an illustrated
+              // pet") that isn't accurate for every book type yet (some are
+              // still an empty background, not a real composite — see the
+              // heroImageSrc field comment in lib/products.ts).
+              <Image
+                src={book.heroImageSrc}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 480px, 90vw"
+                priority
+              />
+            ) : (
+              book.heroEmoji
+            )}
           </div>
         </Container>
       </section>

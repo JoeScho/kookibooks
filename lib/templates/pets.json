@@ -1,0 +1,343 @@
+{
+  "templateId": "pets-very-important-business-v1",
+  "bookType": "pets",
+  "titleTemplate": "{{SUBJECT_NAME}}'s Very Important Business",
+  "pages": [
+    {
+      "pageNumber": 1,
+      "sceneDescription": "{{SUBJECT_NAME}} waking up in their favourite spot, stretching, ready for a big day of very important jobs.",
+      "baseImageAsset": "/templates/pets-v1/page-01-bg.jpg",
+      "textTemplate": "Every morning, right on cue,\n{{SUBJECT_NAME}} wakes with jobs to do.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 2,
+      "sceneDescription": "{{SUBJECT_NAME}} surveying the house or garden importantly, like a tiny supervisor.",
+      "baseImageAsset": "/templates/pets-v1/page-02-bg.jpg",
+      "textTemplate": "A patrol of the house, a sniff of the air,\nMaking sure everything's properly there.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 3,
+      "sceneDescription": "{{SUBJECT_NAME}} pausing at the door or window, ears up, sensing something's about to happen.",
+      "baseImageAsset": "/templates/pets-v1/page-03-bg.jpg",
+      "textTemplate": "But today was no ordinary patrol at all —\nBecause something rather important was about to befall.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-open"
+      }
+    },
+    {
+      "pageNumber": 4,
+      "sceneDescription": "{{SUBJECT_NAME}} trotting off purposefully down the hall or garden path.",
+      "baseImageAsset": "/templates/pets-v1/page-04-bg.jpg",
+      "textTemplate": "Off they trotted, official and proud,\nOn business too important to say out loud.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 5,
+      "sceneDescription": "Family members greeting {{SUBJECT_NAME}} fondly as they pass by on patrol.",
+      "baseImageAsset": "/templates/pets-v1/page-05-bg.jpg",
+      "textTemplate": "Everyone knew the patrol routine —\nThe most important pet they'd ever seen.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 6,
+      "sceneDescription": "{{SUBJECT_NAME}} pausing, head tilted, hearing or spotting something suspicious.",
+      "baseImageAsset": "/templates/pets-v1/page-06-bg.jpg",
+      "textTemplate": "Then a sound! A shape! A rustling thing!\n{{SUBJECT_NAME}}'s ears went straight up, alert to everything.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 7,
+      "sceneDescription": "A signature quirky pet moment in full swing.",
+      "baseImageAsset": "/templates/pets-v1/page-07-bg.jpg",
+      "textTemplate": "Because nobody does 'important business' quite like {{SUBJECT_NAME}} does —\nAnd that's exactly why this story deserves applause.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 0
+      }
+    },
+    {
+      "pageNumber": 8,
+      "sceneDescription": "The aftermath — mild happy chaos, tail wagging, pure joy.",
+      "baseImageAsset": "/templates/pets-v1/page-08-bg.jpg",
+      "textTemplate": "It wasn't tidy, it wasn't neat,\nBut it was {{SUBJECT_NAME}}'s finest feat.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 9,
+      "sceneDescription": "The family laughing, delighted, gathering round {{SUBJECT_NAME}}.",
+      "baseImageAsset": "/templates/pets-v1/page-09-bg.jpg",
+      "textTemplate": "'That's so them!' the family cried,\nWith so much love, and so much pride.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 10,
+      "sceneDescription": "{{SUBJECT_NAME}} facing a small mystery — an object out of place, a closed door.",
+      "baseImageAsset": "/templates/pets-v1/page-10-bg.jpg",
+      "textTemplate": "Then — a mystery! Right there in the hall!\nSomething that needed inspecting, that's all.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 11,
+      "sceneDescription": "{{SUBJECT_NAME}} investigating determinedly, pawing or sniffing at the mystery.",
+      "baseImageAsset": "/templates/pets-v1/page-11-bg.jpg",
+      "textTemplate": "With a sniff and a paw and a very serious stare,\n{{SUBJECT_NAME}} cracked the case, right then and there.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 12,
+      "sceneDescription": "A second, distinct signature quirky pet moment.",
+      "baseImageAsset": "/templates/pets-v1/page-12-bg.jpg",
+      "textTemplate": "Case closed — but the day wasn't nearly through,\nThere was still one more {{SUBJECT_NAME}}-thing left to do.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 1
+      }
+    },
+    {
+      "pageNumber": 13,
+      "sceneDescription": "The ripple effect — toys scattered, a happy mess, everyone amused.",
+      "baseImageAsset": "/templates/pets-v1/page-13-bg.jpg",
+      "textTemplate": "It turned the afternoon upside down,\nIn the very best way a pet's ever found.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 14,
+      "sceneDescription": "A quiet nap moment — {{SUBJECT_NAME}} curled up in a sunbeam or favourite spot.",
+      "baseImageAsset": "/templates/pets-v1/page-14-bg.jpg",
+      "textTemplate": "Even very important pets need rest,\nSo {{SUBJECT_NAME}} curled up — patrol paused, at best.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 15,
+      "sceneDescription": "{{SUBJECT_NAME}} waking up and heading out to a bigger space, refreshed.",
+      "baseImageAsset": "/templates/pets-v1/page-15-bg.jpg",
+      "textTemplate": "But naps don't last — there's too much to see! —\nSo off {{SUBJECT_NAME}} went, business-bound and free.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 16,
+      "sceneDescription": "{{SUBJECT_NAME}} exploring a bigger outdoor scene — garden, park, or field.",
+      "baseImageAsset": "/templates/pets-v1/page-16-bg.jpg",
+      "textTemplate": "Further out, past the fence, past the tree,\nTo see how big a patrol could really be.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 17,
+      "sceneDescription": "A third signature quirky pet moment, in the bigger outdoor setting.",
+      "baseImageAsset": "/templates/pets-v1/page-17-bg.jpg",
+      "textTemplate": "And no patrol of {{SUBJECT_NAME}}'s would ever be complete,\nWithout one final, unmistakably-them feat.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 2
+      }
+    },
+    {
+      "pageNumber": 18,
+      "sceneDescription": "A triumphant, joyful moment — {{SUBJECT_NAME}} mid-zoomies or a victorious pose.",
+      "baseImageAsset": "/templates/pets-v1/page-18-bg.jpg",
+      "textTemplate": "It was silly, it was brave, it was entirely their own —\nA {{SUBJECT_NAME}}-sized moment for the whole world to be shown.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 19,
+      "sceneDescription": "Golden hour, family gathering in the garden, {{SUBJECT_NAME}} the centre of attention.",
+      "baseImageAsset": "/templates/pets-v1/page-19-bg.jpg",
+      "textTemplate": "As the sun dipped low and the sky turned gold,\nThe best part of the patrol was about to unfold.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 20,
+      "sceneDescription": "The emotional high point — a warm, specific real moment between {{SUBJECT_NAME}} and their person.",
+      "baseImageAsset": "/templates/pets-v1/page-20-bg.jpg",
+      "textTemplate": "Because the very best pet stories aren't the loud, big kind —\nThey're the small true moments that stick in your mind.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-climax"
+      }
+    },
+    {
+      "pageNumber": 21,
+      "sceneDescription": "Everyone cheering and laughing, celebrating {{SUBJECT_NAME}}.",
+      "baseImageAsset": "/templates/pets-v1/page-21-bg.jpg",
+      "textTemplate": "Everyone cheered — the whole house, it seemed! —\nFor a patrol that went better than anyone dreamed.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 22,
+      "sceneDescription": "{{SUBJECT_NAME}} heading back inside as evening falls.",
+      "baseImageAsset": "/templates/pets-v1/page-22-bg.jpg",
+      "textTemplate": "And as the stars blinked on, one by one by one,\n{{SUBJECT_NAME}} headed in — the patrol was done.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 23,
+      "sceneDescription": "{{SUBJECT_NAME}} curling up in their bed or basket, sleepy and content.",
+      "baseImageAsset": "/templates/pets-v1/page-23-bg.jpg",
+      "textTemplate": "Bed all fluffed and paws tucked tight,\n{{SUBJECT_NAME}} settled in for the night.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 24,
+      "sceneDescription": "Final goodnight image — {{SUBJECT_NAME}} fast asleep, moonlight through the window.",
+      "baseImageAsset": "/templates/pets-v1/page-24-bg.jpg",
+      "textTemplate": "Because there's only one {{SUBJECT_NAME}} in the whole wide world,\nAnd every quirk and story is a flag they've unfurled.\nGoodnight, {{SUBJECT_NAME}} — patrol complete,\nTomorrow brings more business, important and sweet.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    }
+  ]
+}

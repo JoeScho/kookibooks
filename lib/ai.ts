@@ -3,9 +3,8 @@ import {
   createPartFromBase64,
   createUserContent,
   GoogleGenAI,
-  Type,
 } from "@google/genai";
-import type { NarrativeStyleId } from "@/lib/products";
+import type { PoseId } from "@/lib/templates/types";
 
 const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 fal.config({ credentials: process.env.FAL_KEY });
@@ -13,114 +12,47 @@ fal.config({ credentials: process.env.FAL_KEY });
 export interface BookPage {
   pageNumber: number;
   storyText: string;
+  // Carried through from the template's sceneDescription (see
+  // lib/story-engine.ts) — a text description of what the page depicts.
+  // No longer used to prompt a per-page image (images are composited from
+  // fixed background art, see lib/composer.ts) — kept for debugging/QA.
   imagePrompt: string;
   imageUrl?: string;
 }
 
-// Image generation (fal.ai) is the expensive step, billed per page — cap the
-// page count here in code, not just in the prompt, since nothing guarantees
-// the model actually honours "return exactly N pages". Kept low by default
-// while testing; override via env once ready to scale back up to a full book.
-const MAX_PAGES = Number(process.env.MAX_STORY_PAGES) || 2;
-
-// Shared style language for illustrations — kept in one place so the
-// Gemini-authored scene descriptions and the fal.ai render prompt point at
-// the same aesthetic instead of fighting each other. Deliberately avoids
-// "3D", "cartoon", "8k", "vibrant" — that combination is what pushes toward
-// the generic, over-rendered, big-eyed "AI slop" look. Aiming instead for
-// something calmer and more hand-made, with normal proportions.
-const ART_STYLE =
-  "a gentle, hand-illustrated storybook style with natural proportions and a warm, simple expression";
+// Shared style language for "subject" mode (non-human) hero renders —
+// kept textually identical to STYLE_POSITIVE in
+// scripts/generate-fal-backgrounds.mjs (that file can't import this one —
+// it's a standalone script, this module has a Next-only `server-only`
+// dependency chain) since hero and background now render on the same
+// model (`fal-ai/fast-sdxl`, see below): matching wording is what actually
+// keeps them visually coherent, not just conceptually similar-sounding
+// language — a lesson learned the hard way (see the "flux/dev image-to-image
+// hero vs fast-sdxl background" style-mismatch that prompted this).
+// Keep both copies in sync if either changes.
 const RENDER_STYLE_SUFFIX =
-  "soft hand-painted children's book illustration, gentle flat colours, warm muted palette, natural proportions, simple clean linework, painterly texture, understated and not overly stylised";
+  "vintage mid-century children's picture-book illustration, gouache and watercolour texture, soft muted palette, hand-inked outlines, gentle rounded shapes, warm nostalgic nursery-book quality";
 
-const STORY_SCHEMA = {
-  type: Type.OBJECT,
-  properties: {
-    pages: {
-      type: Type.ARRAY,
-      items: {
-        type: Type.OBJECT,
-        properties: {
-          pageNumber: { type: Type.INTEGER },
-          storyText: { type: Type.STRING },
-          imagePrompt: { type: Type.STRING },
-        },
-        required: ["pageNumber", "storyText", "imagePrompt"],
-      },
-    },
-  },
-  required: ["pages"],
-};
-
-function styleInstruction(style: NarrativeStyleId = "poem"): string {
-  return style === "prose"
-    ? `Each "storyText" is 2-4 sentences of warm, flowing prose — a natural storytelling voice, no forced rhyme.`
-    : `Each "storyText" is 2-4 lines of playful, rhythmic rhyming verse.`;
-}
-
-function isUsablePage(page: unknown): page is BookPage {
-  if (!page || typeof page !== "object") return false;
-  const p = page as Partial<BookPage>;
-  return (
-    typeof p.pageNumber === "number" &&
-    typeof p.storyText === "string" &&
-    p.storyText.trim().length > 0 &&
-    typeof p.imagePrompt === "string" &&
-    p.imagePrompt.trim().length > 0
-  );
-}
-
-/**
- * Validates and normalizes the model's raw page array: drops any
- * malformed entries, sorts and caps at `MAX_PAGES`, and renumbers
- * sequentially so page N always corresponds to array index N-1 — that's
- * what `illustratePages` relies on to pair each image with the right page.
- * Throws on anything that doesn't amount to a usable story, which is what
- * stops `illustratePages` (the paid fal.ai step) from ever running against
- * a failed or empty generation.
- */
-function normalizePages(rawPages: unknown): BookPage[] {
-  const usable = Array.isArray(rawPages) ? rawPages.filter(isUsablePage) : [];
-  if (usable.length === 0) {
-    throw new Error(
-      "The story engine didn't return a usable story. Please try again.",
-    );
-  }
-
-  return usable
-    .sort((a, b) => a.pageNumber - b.pageNumber)
-    .slice(0, MAX_PAGES)
-    .map((page, i) => ({ ...page, pageNumber: i + 1 }));
-}
-
-/** Shared Gemini call — both story modes below funnel through this. */
-async function callStoryModel(prompt: string): Promise<BookPage[]> {
-  const response = await genAI.models.generateContent({
-    model: "gemini-flash-lite-latest",
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: STORY_SCHEMA,
-    },
-  });
-
-  const text = response.text;
-  if (!text) throw new Error("Invalid response from story engine");
-
-  const parsed = JSON.parse(text) as { pages: unknown };
-  return normalizePages(parsed.pages);
-}
+const RENDER_NEGATIVE_PROMPT =
+  "photorealistic, photo, photograph, 3d render, glossy, plastic, " +
+  "hyperrealistic, digital painting, sharp vector lines, high contrast, " +
+  "harsh shading, cel shading, text, watermark, blurry, extra limbs, " +
+  "deformed, multiple animals, person, human, depth of field, bokeh";
 
 /**
  * Looks at the uploaded photo and returns a short, plain description of the
  * subject's actual appearance (breed, colouring, markings). Used only for
  * "subject" illustration mode (non-human subjects, e.g. pets) — Flux PuLID
  * (used for "face" mode) already grounds identity from the photo directly
- * via face embeddings, so it doesn't need this. The general image-to-image
- * model pets use has no equivalent identity lock, so without an explicit
- * text description the story prompt tends to drift onto a generic "cute
- * animal" rather than the actual pet in the photo.
+ * via face embeddings, so it doesn't need this.
+ *
+ * This is now the *only* source of identity for "subject" mode — the hero
+ * render is pure text-to-image (see `generateHeroPoseCutout`), not
+ * conditioned on the photo at all, so a failure here isn't recoverable the
+ * way it used to be. (Earlier this was best-effort on top of an
+ * image-to-image render that used the photo directly; that image-to-image
+ * approach got dropped — see the style-mismatch note on
+ * `RENDER_STYLE_SUFFIX` — so this description is now load-bearing.)
  */
 export async function describeSubjectAppearance(
   photoUrl: string,
@@ -144,104 +76,6 @@ export async function describeSubjectAppearance(
   const text = response.text?.trim();
   if (!text) throw new Error("Couldn't describe the photo");
   return text;
-}
-
-/**
- * Writes the storybook script with Gemini, weaving a short list of real
- * traits/quirks into a story we invent from scratch. Used by the kids
- * funnel. Image generation is a separate step (see `generateConsistentImage`
- * below), handled by fal.ai rather than Gemini.
- */
-export async function generateStoryScript(
-  subjectName: string,
-  traits: string[],
-  opts?: { genre?: "kids" | "pets"; style?: NarrativeStyleId },
-): Promise<BookPage[]> {
-  const genre = opts?.genre ?? "kids";
-  const audience =
-    genre === "kids"
-      ? `a young child named ${subjectName}`
-      : `a pet named ${subjectName}, narrated from the pet's own point of view`;
-  const subjectDescriptor =
-    genre === "kids" ? "illustrated character" : "illustrated animal character";
-
-  const prompt = `
-    You are an award-winning children's book author writing for Kookibooks, a
-    warm, family-friendly, print-on-demand storybook studio. Write a charming
-    ${MAX_PAGES}-page storybook about ${audience}.
-
-    Weave these real traits/quirks into the plot naturally and affectionately
-    — they should feel like the heart of the story, never mocked: ${traits.join(", ")}.
-
-    Keep every page light, kind, and appropriate for all ages — funny and
-    heartfelt, never mean-spirited, scary, or inappropriate.
-
-    Return exactly ${MAX_PAGES} pages. ${styleInstruction(opts?.style)} Each
-    "imagePrompt" is a detailed visual scene description for an illustrator,
-    always describing the subject as "an ${subjectDescriptor} named
-    ${subjectName}, drawn in ${ART_STYLE}".
-  `;
-
-  return callStoryModel(prompt);
-}
-
-/**
- * Writes the storybook script by expanding a real, free-text story into a
- * full narrative — used by the couples/beige-flags and pets funnels. Unlike
- * `generateStoryScript`, this doesn't invent a plot: the buyer's own story
- * IS the plot, embellished and given shape.
- *
- * `illustratedName` is the subject whose photo is the visual reference for
- * every page (a person for couples, a pet for pets). `fromName`, when given,
- * frames the story as written by that person for the illustrated subject —
- * omit it for pets, which are narrated in third person / from their own POV
- * rather than "written by" someone. `appearanceDescription`, when given
- * (see `describeSubjectAppearance`), is threaded into every imagePrompt so
- * the illustrations actually match what's in the photo.
- */
-export async function generateStoryFromNarrative(
-  illustratedName: string,
-  story: string,
-  opts?: {
-    fromName?: string;
-    appearanceDescription?: string;
-    style?: NarrativeStyleId;
-  },
-): Promise<BookPage[]> {
-  const framing = opts?.fromName
-    ? `${opts.fromName} wrote you a real story about their loved one, ${illustratedName}, to turn into a gift book.`
-    : `Here's a real story about ${illustratedName} to turn into a book.`;
-
-  const appearanceLine = opts?.appearanceDescription
-    ? `\n\n${illustratedName}'s actual appearance, for the illustrations: ${opts.appearanceDescription}. Every "imagePrompt" must reflect this — don't substitute a generic or different-looking subject.`
-    : "";
-
-  const prompt = `
-    You are an award-winning children's book author writing for Kookibooks, a
-    warm, family-friendly, print-on-demand storybook studio. ${framing}
-    Expand it into a charming ${MAX_PAGES}-page storybook.
-
-    Use their story as the central plot — don't replace it with something you
-    invent. Give it a clear beginning, middle, and warm ending; you can
-    embellish playfully, but the emotional heart and the specific, real
-    details below must stay recognisable throughout.
-
-    Their story, in their own words:
-    """
-    ${story}
-    """
-    ${appearanceLine}
-
-    Keep every page light, kind, and appropriate for all ages — funny and
-    heartfelt, never mean-spirited, scary, or inappropriate.
-
-    Return exactly ${MAX_PAGES} pages. ${styleInstruction(opts?.style)} Each
-    "imagePrompt" is a detailed visual scene description for an illustrator,
-    always describing the subject as "${illustratedName}, drawn in
-    ${ART_STYLE}"${opts?.appearanceDescription ? `, matching: ${opts.appearanceDescription}` : ""}.
-  `;
-
-  return callStoryModel(prompt);
 }
 
 /**
@@ -269,83 +103,120 @@ function extractFalErrorDetail(err: unknown): string {
   return err instanceof Error ? err.message : "Image generation failed.";
 }
 
-type IllustrationMode = "face" | "subject";
+export type IllustrationMode = "face" | "subject";
+
+const POSE_PROMPTS: Record<PoseId, string> = {
+  greeting: "standing, warm open pose, looking at the viewer, friendly",
+  curious: "leaning in slightly, head tilted, curious and alert expression",
+  playing: "mid-motion, playful and animated, joyful energy",
+  cozy: "sitting or curled up, relaxed and content, soft calm expression",
+  walking: "mid-stride, walking forward, purposeful and cheerful",
+};
 
 /**
- * Renders one illustrated page via fal.ai, using the uploaded photo as a
- * reference so the subject stays consistent across every page.
+ * Renders one full-body pose of the hero character via fal.ai, then removes
+ * the background so the result can be composited onto any page's fixed
+ * artwork (see lib/composer.ts).
  *
- * "face" mode uses Flux PuLID, which locks onto a human face — it hard-fails
- * ("no face detected") on anything else, so pets and other non-human
- * subjects use "subject" mode instead: a general image-to-image restyle
- * that doesn't require face landmarks. It has no equivalent identity lock,
- * so a *low* `strength` (which anchors tightly to the source photo's exact
- * pixels) seems like the fix — but it isn't: it repaints one composition
- * instead of generating the page's actual scene, producing the same
- * pose/background on every page, and a real-photo-lightly-repainted look
- * reads as uncanny rather than illustrated. Identity instead comes from the
- * imagePrompt's text appearance description (see `describeSubjectAppearance`
- * and `appearanceLine` below), which frees `strength` to run high enough
- * that the model actually draws each page's distinct scene.
+ * "face" mode (human subjects — kids, couples) uses Flux PuLID, which locks
+ * onto the uploaded photo's face via embeddings — it hard-fails ("no face
+ * detected") on anything else, so non-human subjects use "subject" mode
+ * instead.
+ *
+ * "subject" mode is pure text-to-image on `fal-ai/fast-sdxl` — the same
+ * model the fixed background art is generated on (see
+ * scripts/generate-fal-backgrounds.mjs) — driven entirely by
+ * `appearanceDescription`, not the photo. An earlier version ran this as
+ * image-to-image against the uploaded photo instead: it kept the subject
+ * *recognisable*, but rendered in a different model's default aesthetic
+ * (glossier, more "vector cartoon") than the watercolour background art,
+ * so the composited result looked like a sticker pasted on rather than one
+ * illustration. Dropping the photo conditioning and generating from the
+ * text description alone, on the same model as the backgrounds, fixed the
+ * coherence at the cost of the render being guided by a description of the
+ * subject rather than the photo's exact pixels — an acceptable trade for a
+ * storybook illustration, not a photo lookalike.
  */
-export async function generateConsistentImage(
-  imagePrompt: string,
+async function generateHeroPoseCutout(
+  pose: PoseId,
   facePhotoUrl: string,
-  mode: IllustrationMode = "face",
+  mode: IllustrationMode,
+  appearanceDescription?: string,
 ): Promise<string> {
-  const styledPrompt = `${imagePrompt}, ${RENDER_STYLE_SUFFIX}`;
-
+  let rawUrl: string;
   try {
     if (mode === "subject") {
-      // No `image_size` here — this endpoint doesn't take one and inherits
-      // the source photo's own dimensions. Pages render into a square frame
-      // downstream (BookPageGrid, the print PDF) via center-crop, so a
-      // non-square upload is handled, just not perfectly framed.
-      //
-      // strength is high: this is the model's "how much to deviate from the
-      // source image" dial, and each page needs a genuinely different scene
-      // (pose, background, action) rather than a repaint of one photo. The
-      // appearance description baked into `imagePrompt` is what keeps the
-      // subject recognisable at this strength, not the source pixels.
-      const result = await fal.subscribe("fal-ai/flux/dev/image-to-image", {
+      if (!appearanceDescription) {
+        throw new Error(
+          "Missing appearance description — required to render a subject-mode hero.",
+        );
+      }
+      const prompt =
+        `Full-body character illustration of a subject matching this ` +
+        `appearance: ${appearanceDescription}. ${POSE_PROMPTS[pose]}, ` +
+        `isolated on a plain white background. ${RENDER_STYLE_SUFFIX}.`;
+      const result = await fal.subscribe("fal-ai/fast-sdxl", {
         input: {
-          prompt: styledPrompt,
-          image_url: facePhotoUrl,
-          strength: 0.85,
+          prompt,
+          negative_prompt: RENDER_NEGATIVE_PROMPT,
+          image_size: "square_hd",
+          guidance_scale: 7.5,
+          num_inference_steps: 30,
         },
       });
-      return result.data.images[0].url;
+      rawUrl = result.data.images[0].url;
+    } else {
+      const prompt = `Full-body character portrait, ${POSE_PROMPTS[pose]}, isolated on a plain flat white background, ${RENDER_STYLE_SUFFIX}.`;
+      const result = await fal.subscribe("fal-ai/flux-pulid", {
+        input: {
+          prompt,
+          reference_image_url: facePhotoUrl,
+          image_size: "square_hd",
+          guidance_scale: 3.5,
+          num_inference_steps: 20,
+        },
+      });
+      rawUrl = result.data.images[0].url;
     }
-
-    const result = await fal.subscribe("fal-ai/flux-pulid", {
-      input: {
-        prompt: styledPrompt,
-        reference_image_url: facePhotoUrl,
-        image_size: "square_hd",
-        guidance_scale: 3.5,
-        num_inference_steps: 20,
-      },
-    });
-    return result.data.images[0].url;
   } catch (err) {
-    throw new Error(`Illustration failed: ${extractFalErrorDetail(err)}`);
+    throw new Error(`Hero render failed: ${extractFalErrorDetail(err)}`);
+  }
+
+  try {
+    const cutout = await fal.subscribe("fal-ai/imageutils/rembg", {
+      input: { image_url: rawUrl },
+    });
+    return cutout.data.image.url;
+  } catch (err) {
+    throw new Error(`Background removal failed: ${extractFalErrorDetail(err)}`);
   }
 }
 
-/** Generates every page's illustration in parallel. */
-export async function illustratePages(
-  pages: BookPage[],
+/**
+ * Renders every distinct pose a template needs, once each, in parallel.
+ * Returns transparent-background cutout URLs keyed by pose, ready for
+ * lib/composer.ts to composite onto each page's fixed background art.
+ */
+export async function generateHeroPoses(
+  poses: PoseId[],
   facePhotoUrl: string,
-  mode: IllustrationMode = "face",
-): Promise<BookPage[]> {
-  return Promise.all(
-    pages.map(async (page) => ({
-      ...page,
-      imageUrl: await generateConsistentImage(
-        page.imagePrompt,
-        facePhotoUrl,
-        mode,
-      ),
-    })),
+  mode: IllustrationMode,
+  appearanceDescription?: string,
+): Promise<Record<PoseId, string>> {
+  const distinctPoses = Array.from(new Set(poses));
+  const entries = await Promise.all(
+    distinctPoses.map(
+      async (pose) =>
+        [
+          pose,
+          await generateHeroPoseCutout(
+            pose,
+            facePhotoUrl,
+            mode,
+            appearanceDescription,
+          ),
+        ] as const,
+    ),
   );
+  return Object.fromEntries(entries) as Record<PoseId, string>;
 }

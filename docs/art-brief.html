@@ -1,0 +1,2695 @@
+<title>Kookibooks Art Brief</title>
+<style>
+  :root {
+    --bg: #fffbf0;
+    --surface: #ffffff;
+    --surface-2: #fff6e0;
+    --ink: #1e293b;
+    --ink-soft: #475569;
+    --border: #f1ede1;
+    --border-strong: #e7ddc7;
+
+    --sun: #e0a72e;
+    --sun-ink: #7a5514;
+    --sun-bg: #fff3d6;
+    --mint: #2f9e6f;
+    --mint-ink: #1f6e4c;
+    --mint-bg: #ddf3e8;
+    --coral: #ff6b52;
+    --coral-ink: #b13d27;
+    --coral-bg: #ffe4de;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #18140f;
+      --surface: #221c15;
+      --surface-2: #271f16;
+      --ink: #f3ecdc;
+      --ink-soft: #b7ab93;
+      --border: #382e21;
+      --border-strong: #473927;
+
+      --sun: #f0bb52;
+      --sun-ink: #f0bb52;
+      --sun-bg: #3a2c12;
+      --mint: #5cc796;
+      --mint-ink: #5cc796;
+      --mint-bg: #16332590;
+      --coral: #ff8a72;
+      --coral-ink: #ff8a72;
+      --coral-bg: #3d2018;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #18140f;
+    --surface: #221c15;
+    --surface-2: #271f16;
+    --ink: #f3ecdc;
+    --ink-soft: #b7ab93;
+    --border: #382e21;
+    --border-strong: #473927;
+
+    --sun: #f0bb52;
+    --sun-ink: #f0bb52;
+    --sun-bg: #3a2c12;
+    --mint: #5cc796;
+    --mint-ink: #5cc796;
+    --mint-bg: #16332590;
+    --coral: #ff8a72;
+    --coral-ink: #ff8a72;
+    --coral-bg: #3d2018;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+  }
+  h1, h2 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px 96px;
+  }
+
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .top-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 22px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  h1 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem); margin: 2px 0 0; }
+  .lede {
+    max-width: 68ch;
+    color: var(--ink-soft);
+    font-size: 0.96rem;
+    margin: 4px 0 0;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    appearance: none;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tab::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tab-accent);
+  }
+  .tab.active {
+    border-color: var(--tab-accent);
+    color: var(--tab-accent-ink);
+    background: color-mix(in srgb, var(--tab-accent) 14%, var(--surface));
+  }
+  .tab:focus-visible { outline: 2px solid var(--tab-accent); outline-offset: 2px; }
+
+  .template { padding-top: 32px; }
+  .template[hidden] { display: none; }
+  .template-intro {
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--section-accent);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .template-intro h2 { font-size: 1.3rem; margin: 0 0 4px; }
+  .template-meta { margin: 0 0 6px; color: var(--ink-soft); font-size: 0.85rem; }
+  .template-title { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+  .template-title em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 14px 0;
+  }
+  .page-no {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .badge.dynamic {
+    background: color-mix(in srgb, var(--section-accent) 20%, var(--surface));
+    color: var(--section-accent-ink);
+  }
+
+  .card-body {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 12px;
+    padding: 10px 14px 12px;
+    align-items: start;
+  }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .scene-text { margin: 0 0 8px; font-size: 0.9rem; }
+  .story {
+    margin: 0 0 6px;
+    padding: 8px 10px;
+    border-left: 2px solid var(--border-strong);
+    background: var(--surface-2);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.84rem;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .hint { margin: 0; font-size: 0.74rem; color: var(--ink-soft); }
+
+  .card-foot {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 14px;
+    border-top: 1px dashed var(--border-strong);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    .card-body { grid-template-columns: 1fr; }
+    .diagram { max-width: 160px; }
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <div class="top-inner">
+      <div>
+        <p class="eyebrow">Kookibooks &middot; background production</p>
+        <h1>Art Brief</h1>
+        <p class="lede">
+          One background per page, 1600&times;1600px, matching the scene below.
+          Leave the dashed area open — the hero character is composited on
+          top separately per buyer (see <code>lib/ai.ts</code>). Style: simple,
+          soft, gently-shaded storybook illustration in the spirit of classic
+          <em>Winnie&#8209;the&#8209;Pooh</em> &mdash; warm muted colours, calm and
+          timeless, not flat vector, not busy or hyper-rendered.
+        </p>
+      </div>
+      <nav class="tabs" aria-label="Book type">
+        <button class="tab active" data-target="tpl-kids" style="--tab-accent: var(--sun); --tab-accent-ink: var(--sun-ink)">Kids</button>
+<button class="tab" data-target="tpl-pets" style="--tab-accent: var(--mint); --tab-accent-ink: var(--mint-ink)">Pets</button>
+<button class="tab" data-target="tpl-couples" style="--tab-accent: var(--coral); --tab-accent-ink: var(--coral-ink)">Couples</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+  <section class="template" id="tpl-kids" data-book-type="kids" style="--section-accent: var(--sun); --section-accent-ink: var(--sun-ink)">
+    <div class="template-intro">
+      <h2>Custom Kids&#39; Storybook</h2>
+      <p class="template-meta"><code>kids-wonder-full-day-v1</code></p>
+      <p class="template-title">Title: <em>{{SUBJECT_NAME}}&#39;s Big Wonder-Full Day</em></p>
+    </div>
+    <div class="grid">
+      
+  <article class="card" data-page="1">
+    <header class="card-head">
+      <span class="page-no">01</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} waking up in a cosy bedroom, sunlight streaming in, stretching and grinning at the day ahead.</p>
+        <blockquote class="story">In a cosy little room where the morning light creeps in,<br/>Lived {{SUBJECT_NAME}} — and the day was about to begin!</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-01-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="2">
+    <header class="card-head">
+      <span class="page-no">02</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} at the breakfast table, humming, looking thoughtfully out the window, planning the day.</p>
+        <blockquote class="story">Some days start slow, with a yawn and a stretch,<br/>But {{SUBJECT_NAME}}&#39;s days always come with a fetch —<br/>Something to wonder, something to find,<br/>A whole day of adventure, still left to unwind.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-02-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="3">
+    <header class="card-head">
+      <span class="page-no">03</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        <span class="badge dynamic">dynamic — Story opening</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} pausing at the front door, hand on the handle, a hint of something exciting about to unfold.</p>
+        <blockquote class="story">And today was no ordinary day at all,<br/>Because something was about to happen — big or small.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-03-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="4">
+    <header class="card-head">
+      <span class="page-no">04</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} striding down a garden path or street, backpack or toy in hand.</p>
+        <blockquote class="story">Out the door and down the path, {{SUBJECT_NAME}} would go,<br/>Wherever the wondering took them — fast or slow.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-04-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="5">
+    <header class="card-head">
+      <span class="page-no">05</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Neighbours or friends waving hello as {{SUBJECT_NAME}} passes by.</p>
+        <blockquote class="story">The whole street seemed to know their name,<br/>Every wave and &#39;good morning!&#39; was never quite the same.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-05-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="6">
+    <header class="card-head">
+      <span class="page-no">06</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} pausing curiously, peering around a corner or up at the sky.</p>
+        <blockquote class="story">But {{SUBJECT_NAME}} had a feeling, right down in their toes,<br/>That today held a secret nobody else knows.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-06-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="7">
+    <header class="card-head">
+      <span class="page-no">07</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 1</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A signature quirky moment for {{SUBJECT_NAME}} in full swing — playful, a little silly, entirely them.</p>
+        <blockquote class="story">Because {{SUBJECT_NAME}} was never quite like anyone else —<br/>And that&#39;s exactly why this story&#39;s worth itself.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-07-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="8">
+    <header class="card-head">
+      <span class="page-no">08</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The joyful aftermath — toys scattered, laughter, a happy little mess.</p>
+        <blockquote class="story">Wherever that led — however peculiar it seemed —<br/>It turned an ordinary morning into something dreamed.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-08-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="9">
+    <header class="card-head">
+      <span class="page-no">09</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Friends or family gathering round, delighted, laughing with {{SUBJECT_NAME}}.</p>
+        <blockquote class="story">Friends came running when they heard the commotion,<br/>&#39;That&#39;s so {{SUBJECT_NAME}}!&#39; — with total devotion.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-09-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="10">
+    <header class="card-head">
+      <span class="page-no">10</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} looking at a small puzzle — a stuck door, a tangled kite string.</p>
+        <blockquote class="story">Then — uh oh — a puzzle popped up out of nowhere,<br/>Something tricky, something that needed some care.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-10-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="11">
+    <header class="card-head">
+      <span class="page-no">11</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} actively solving the puzzle, hands-on, determined and cheerful.</p>
+        <blockquote class="story">But {{SUBJECT_NAME}} never once thought to give up,<br/>They rolled up their sleeves and figured it up.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-11-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="12">
+    <header class="card-head">
+      <span class="page-no">12</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 2</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A second, distinct signature quirky moment for {{SUBJECT_NAME}}.</p>
+        <blockquote class="story">And just when you&#39;d think the day had run out of surprise,<br/>Another little {{SUBJECT_NAME}}-ism opened everyone&#39;s eyes.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-12-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="13">
+    <header class="card-head">
+      <span class="page-no">13</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The ripple effect of the quirk spreading warmth and fun through the setting.</p>
+        <blockquote class="story">It turned the afternoon quite delightfully strange,<br/>In the best possible, {{SUBJECT_NAME}}-shaped kind of way.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-13-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="14">
+    <header class="card-head">
+      <span class="page-no">14</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A tender quiet pause — {{SUBJECT_NAME}} sitting still, maybe with a pet or toy, soft light.</p>
+        <blockquote class="story">For just one moment, the whole world went quiet,<br/>And {{SUBJECT_NAME}} sat still, in the hush after the riot.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-14-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="15">
+    <header class="card-head">
+      <span class="page-no">15</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} setting off again, energised, heading toward a bigger open space.</p>
+        <blockquote class="story">Then up they popped, with a brand new plan,<br/>The best adventures always outrun a nap!</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-15-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="16">
+    <header class="card-head">
+      <span class="page-no">16</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} exploring a bigger outdoor scene — trees, a stream, or a hill.</p>
+        <blockquote class="story">Further and further, past the garden gate,<br/>To see how much wonder one day could hold, at any rate.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-16-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="17">
+    <header class="card-head">
+      <span class="page-no">17</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 3</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A third signature quirky moment, in this bigger outdoor setting.</p>
+        <blockquote class="story">And it wouldn&#39;t be a proper {{SUBJECT_NAME}} day, not one bit,<br/>Without one more quirk to go with it.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-17-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="18">
+    <header class="card-head">
+      <span class="page-no">18</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A triumphant beat — {{SUBJECT_NAME}} celebrating mid-action, arms up or laughing.</p>
+        <blockquote class="story">It was silly, it was brave, it was entirely their own —<br/>A {{SUBJECT_NAME}}-sized moment, for the whole world to be shown.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-18-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="19">
+    <header class="card-head">
+      <span class="page-no">19</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Golden-hour scene, {{SUBJECT_NAME}} and loved ones gathering, anticipation building.</p>
+        <blockquote class="story">As the sun leaned low and the sky turned gold,<br/>The very best part of the day was about to unfold.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-19-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="20">
+    <header class="card-head">
+      <span class="page-no">20</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        <span class="badge dynamic">dynamic — Story climax</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The emotional high point — {{SUBJECT_NAME}} at the centre of a warm, specific real moment.</p>
+        <blockquote class="story">Because the very best stories aren&#39;t the loud, big kind —<br/>They&#39;re the small true moments that stay in your mind.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-20-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="21">
+    <header class="card-head">
+      <span class="page-no">21</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--sun)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A joyful gathering — friends and family cheering, celebratory.</p>
+        <blockquote class="story">Everyone cheered — the whole street, it seemed! —<br/>For a day that turned out better than {{SUBJECT_NAME}} had dreamed.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-21-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="22">
+    <header class="card-head">
+      <span class="page-no">22</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} walking home under a dusky, starry sky.</p>
+        <blockquote class="story">And as the stars blinked on, one by one by one,<br/>{{SUBJECT_NAME}} headed home — the day&#39;s work was done.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-22-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="23">
+    <header class="card-head">
+      <span class="page-no">23</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} in bed, cosy, smiling sleepily, maybe hugging a toy.</p>
+        <blockquote class="story">Pyjamas on, teeth brushed, tucked in tight,<br/>{{SUBJECT_NAME}} looked back on a truly wonder-full night.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-23-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="24">
+    <header class="card-head">
+      <span class="page-no">24</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--sun-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--sun)" fill-opacity="0.16"
+          stroke="var(--sun)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Final goodnight image — {{SUBJECT_NAME}} peacefully asleep, moonlight, warm and cosy.</p>
+        <blockquote class="story">Because there&#39;s only one you in the whole wide world,<br/>And every quirk and story is a flag you&#39;ve unfurled.<br/>Goodnight, {{SUBJECT_NAME}} — sweet dreams, sleep tight,<br/>Tomorrow&#39;s another wonder-full day in sight.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/kids-v1/page-24-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+    </div>
+  </section>
+
+  <section class="template" id="tpl-pets" data-book-type="pets" style="--section-accent: var(--mint); --section-accent-ink: var(--mint-ink)">
+    <div class="template-intro">
+      <h2>Pet Quirks Book</h2>
+      <p class="template-meta"><code>pets-very-important-business-v1</code></p>
+      <p class="template-title">Title: <em>{{SUBJECT_NAME}}&#39;s Very Important Business</em></p>
+    </div>
+    <div class="grid">
+      
+  <article class="card" data-page="1">
+    <header class="card-head">
+      <span class="page-no">01</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} waking up in their favourite spot, stretching, ready for a big day of very important jobs.</p>
+        <blockquote class="story">Every morning, right on cue,<br/>{{SUBJECT_NAME}} wakes with jobs to do.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-01-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="2">
+    <header class="card-head">
+      <span class="page-no">02</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} surveying the house or garden importantly, like a tiny supervisor.</p>
+        <blockquote class="story">A patrol of the house, a sniff of the air,<br/>Making sure everything&#39;s properly there.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-02-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="3">
+    <header class="card-head">
+      <span class="page-no">03</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        <span class="badge dynamic">dynamic — Story opening</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} pausing at the door or window, ears up, sensing something&#39;s about to happen.</p>
+        <blockquote class="story">But today was no ordinary patrol at all —<br/>Because something rather important was about to befall.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-03-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="4">
+    <header class="card-head">
+      <span class="page-no">04</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} trotting off purposefully down the hall or garden path.</p>
+        <blockquote class="story">Off they trotted, official and proud,<br/>On business too important to say out loud.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-04-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="5">
+    <header class="card-head">
+      <span class="page-no">05</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Family members greeting {{SUBJECT_NAME}} fondly as they pass by on patrol.</p>
+        <blockquote class="story">Everyone knew the patrol routine —<br/>The most important pet they&#39;d ever seen.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-05-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="6">
+    <header class="card-head">
+      <span class="page-no">06</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} pausing, head tilted, hearing or spotting something suspicious.</p>
+        <blockquote class="story">Then a sound! A shape! A rustling thing!<br/>{{SUBJECT_NAME}}&#39;s ears went straight up, alert to everything.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-06-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="7">
+    <header class="card-head">
+      <span class="page-no">07</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 1</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A signature quirky pet moment in full swing.</p>
+        <blockquote class="story">Because nobody does &#39;important business&#39; quite like {{SUBJECT_NAME}} does —<br/>And that&#39;s exactly why this story deserves applause.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-07-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="8">
+    <header class="card-head">
+      <span class="page-no">08</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The aftermath — mild happy chaos, tail wagging, pure joy.</p>
+        <blockquote class="story">It wasn&#39;t tidy, it wasn&#39;t neat,<br/>But it was {{SUBJECT_NAME}}&#39;s finest feat.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-08-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="9">
+    <header class="card-head">
+      <span class="page-no">09</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The family laughing, delighted, gathering round {{SUBJECT_NAME}}.</p>
+        <blockquote class="story">&#39;That&#39;s so them!&#39; the family cried,<br/>With so much love, and so much pride.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-09-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="10">
+    <header class="card-head">
+      <span class="page-no">10</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} facing a small mystery — an object out of place, a closed door.</p>
+        <blockquote class="story">Then — a mystery! Right there in the hall!<br/>Something that needed inspecting, that&#39;s all.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-10-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="11">
+    <header class="card-head">
+      <span class="page-no">11</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} investigating determinedly, pawing or sniffing at the mystery.</p>
+        <blockquote class="story">With a sniff and a paw and a very serious stare,<br/>{{SUBJECT_NAME}} cracked the case, right then and there.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-11-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="12">
+    <header class="card-head">
+      <span class="page-no">12</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 2</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A second, distinct signature quirky pet moment.</p>
+        <blockquote class="story">Case closed — but the day wasn&#39;t nearly through,<br/>There was still one more {{SUBJECT_NAME}}-thing left to do.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-12-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="13">
+    <header class="card-head">
+      <span class="page-no">13</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The ripple effect — toys scattered, a happy mess, everyone amused.</p>
+        <blockquote class="story">It turned the afternoon upside down,<br/>In the very best way a pet&#39;s ever found.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-13-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="14">
+    <header class="card-head">
+      <span class="page-no">14</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A quiet nap moment — {{SUBJECT_NAME}} curled up in a sunbeam or favourite spot.</p>
+        <blockquote class="story">Even very important pets need rest,<br/>So {{SUBJECT_NAME}} curled up — patrol paused, at best.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-14-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="15">
+    <header class="card-head">
+      <span class="page-no">15</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} waking up and heading out to a bigger space, refreshed.</p>
+        <blockquote class="story">But naps don&#39;t last — there&#39;s too much to see! —<br/>So off {{SUBJECT_NAME}} went, business-bound and free.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-15-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="16">
+    <header class="card-head">
+      <span class="page-no">16</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} exploring a bigger outdoor scene — garden, park, or field.</p>
+        <blockquote class="story">Further out, past the fence, past the tree,<br/>To see how big a patrol could really be.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-16-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="17">
+    <header class="card-head">
+      <span class="page-no">17</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 3</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A third signature quirky pet moment, in the bigger outdoor setting.</p>
+        <blockquote class="story">And no patrol of {{SUBJECT_NAME}}&#39;s would ever be complete,<br/>Without one final, unmistakably-them feat.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-17-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="18">
+    <header class="card-head">
+      <span class="page-no">18</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A triumphant, joyful moment — {{SUBJECT_NAME}} mid-zoomies or a victorious pose.</p>
+        <blockquote class="story">It was silly, it was brave, it was entirely their own —<br/>A {{SUBJECT_NAME}}-sized moment for the whole world to be shown.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-18-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="19">
+    <header class="card-head">
+      <span class="page-no">19</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Golden hour, family gathering in the garden, {{SUBJECT_NAME}} the centre of attention.</p>
+        <blockquote class="story">As the sun dipped low and the sky turned gold,<br/>The best part of the patrol was about to unfold.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-19-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="20">
+    <header class="card-head">
+      <span class="page-no">20</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        <span class="badge dynamic">dynamic — Story climax</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The emotional high point — a warm, specific real moment between {{SUBJECT_NAME}} and their person.</p>
+        <blockquote class="story">Because the very best pet stories aren&#39;t the loud, big kind —<br/>They&#39;re the small true moments that stick in your mind.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-20-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="21">
+    <header class="card-head">
+      <span class="page-no">21</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--mint)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Everyone cheering and laughing, celebrating {{SUBJECT_NAME}}.</p>
+        <blockquote class="story">Everyone cheered — the whole house, it seemed! —<br/>For a patrol that went better than anyone dreamed.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-21-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="22">
+    <header class="card-head">
+      <span class="page-no">22</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} heading back inside as evening falls.</p>
+        <blockquote class="story">And as the stars blinked on, one by one by one,<br/>{{SUBJECT_NAME}} headed in — the patrol was done.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-22-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="23">
+    <header class="card-head">
+      <span class="page-no">23</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} curling up in their bed or basket, sleepy and content.</p>
+        <blockquote class="story">Bed all fluffed and paws tucked tight,<br/>{{SUBJECT_NAME}} settled in for the night.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-23-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="24">
+    <header class="card-head">
+      <span class="page-no">24</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--mint-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--mint)" fill-opacity="0.16"
+          stroke="var(--mint)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Final goodnight image — {{SUBJECT_NAME}} fast asleep, moonlight through the window.</p>
+        <blockquote class="story">Because there&#39;s only one {{SUBJECT_NAME}} in the whole wide world,<br/>And every quirk and story is a flag they&#39;ve unfurled.<br/>Goodnight, {{SUBJECT_NAME}} — patrol complete,<br/>Tomorrow brings more business, important and sweet.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/pets-v1/page-24-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+    </div>
+  </section>
+
+  <section class="template" id="tpl-couples" data-book-type="couples" style="--section-accent: var(--coral); --section-accent-ink: var(--coral-ink)">
+    <div class="template-intro">
+      <h2>Beige Flags Book</h2>
+      <p class="template-meta"><code>couples-book-of-you-v1</code></p>
+      <p class="template-title">Title: <em>The Book of {{SUBJECT_NAME}}, According to {{FROM_NAME}}</em></p>
+    </div>
+    <div class="grid">
+      
+  <article class="card" data-page="1">
+    <header class="card-head">
+      <span class="page-no">01</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} in a warm, everyday home moment — making coffee, reading, ordinary morning charm.</p>
+        <blockquote class="story">Once upon an ordinary morning, at home, at ease,<br/>Was {{SUBJECT_NAME}} — doing exactly as they please.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-01-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="2">
+    <header class="card-head">
+      <span class="page-no">02</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} going about their day, a small idiosyncratic habit visible.</p>
+        <blockquote class="story">Now, {{FROM_NAME}} could tell you a thousand small things,<br/>About the particular joy that {{SUBJECT_NAME}} brings.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-02-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="3">
+    <header class="card-head">
+      <span class="page-no">03</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        <span class="badge dynamic">dynamic — Story opening</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} paused mid-moment, about to do something characteristic and charming.</p>
+        <blockquote class="story">But there&#39;s one story {{FROM_NAME}} tells again and again —<br/>The one that explains, more than most, exactly when...</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-03-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="4">
+    <header class="card-head">
+      <span class="page-no">04</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} heading out the door or into a scene, purposeful and warm.</p>
+        <blockquote class="story">Because {{SUBJECT_NAME}} has a way of turning any old day,<br/>Into something worth telling, in their own particular way.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-04-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="5">
+    <header class="card-head">
+      <span class="page-no">05</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Friends or family greeting {{SUBJECT_NAME}} warmly.</p>
+        <blockquote class="story">Everyone who meets them ends up feeling the same —<br/>That the world&#39;s a little brighter since {{SUBJECT_NAME}} came.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-05-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="6">
+    <header class="card-head">
+      <span class="page-no">06</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} pausing, thoughtful, noticing something small and lovely.</p>
+        <blockquote class="story">{{FROM_NAME}} noticed it early — that particular knack,<br/>For noticing beauty that others might overlook, or lack.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-06-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="7">
+    <header class="card-head">
+      <span class="page-no">07</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 1</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A signature charming quirk moment in full swing.</p>
+        <blockquote class="story">Because nobody does it quite like {{SUBJECT_NAME}} does —<br/>And that&#39;s exactly why this story deserves a round of applause.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-07-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="8">
+    <header class="card-head">
+      <span class="page-no">08</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The warm ripple effect of the quirk — laughter, closeness.</p>
+        <blockquote class="story">It wasn&#39;t perfect, it wasn&#39;t neat,<br/>But it was {{SUBJECT_NAME}}&#39;s most lovable feat.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-08-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="9">
+    <header class="card-head">
+      <span class="page-no">09</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Friends gathered, laughing fondly, retelling the moment.</p>
+        <blockquote class="story">&#39;That&#39;s so them!&#39; the whole room cried,<br/>With so much love, and so much pride.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-09-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="10">
+    <header class="card-head">
+      <span class="page-no">10</span>
+      <div class="badges">
+        <span class="badge pose">curious</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A small everyday hiccup — a mix-up, a mishap.</p>
+        <blockquote class="story">Then — a wobble! A moment gone slightly wrong!<br/>The kind that becomes a favourite story before long.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-10-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="11">
+    <header class="card-head">
+      <span class="page-no">11</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} handling the mishap with their particular grace or humour.</p>
+        <blockquote class="story">But {{SUBJECT_NAME}} handled it their own particular way,<br/>Turning a mishap into the best part of the day.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-11-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="12">
+    <header class="card-head">
+      <span class="page-no">12</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 2</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A second, distinct signature quirk moment.</p>
+        <blockquote class="story">And just when you&#39;d think the story had run its course,<br/>One more {{SUBJECT_NAME}}-ism came, right from the source.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-12-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="13">
+    <header class="card-head">
+      <span class="page-no">13</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The warmth spreading — a shared laugh, a tender look.</p>
+        <blockquote class="story">It turned an ordinary evening quite delightfully strange,<br/>In the best possible, {{SUBJECT_NAME}}-shaped kind of way.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-13-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="14">
+    <header class="card-head">
+      <span class="page-no">14</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A quiet tender moment — {{SUBJECT_NAME}} and {{FROM_NAME}} sitting close, soft light.</p>
+        <blockquote class="story">For just one moment, the whole world went quiet,<br/>And there they sat, together, past the riot.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-14-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="15">
+    <header class="card-head">
+      <span class="page-no">15</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} setting off on a small adventure or outing.</p>
+        <blockquote class="story">Then up they got, with a brand new plan,<br/>The best kind of love always outruns a nap.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-15-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="16">
+    <header class="card-head">
+      <span class="page-no">16</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} out in a bigger scene — a walk, a trip, an outing.</p>
+        <blockquote class="story">Further and further, hand in hand,<br/>To see how much love one day could hold, unplanned.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-16-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="17">
+    <header class="card-head">
+      <span class="page-no">17</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        <span class="badge dynamic">dynamic — Trait 3</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A third signature quirk moment, in the bigger outing setting.</p>
+        <blockquote class="story">And it wouldn&#39;t be a proper {{SUBJECT_NAME}} story, not one bit,<br/>Without one more quirk to go with it.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-17-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="18">
+    <header class="card-head">
+      <span class="page-no">18</span>
+      <div class="badges">
+        <span class="badge pose">playing</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A joyful triumphant beat — {{SUBJECT_NAME}} laughing, mid-moment.</p>
+        <blockquote class="story">It was silly, it was warm, it was entirely their own —<br/>A {{SUBJECT_NAME}}-sized moment, for the whole world to be shown.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-18-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="19">
+    <header class="card-head">
+      <span class="page-no">19</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 140, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="8.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Golden hour, {{SUBJECT_NAME}} and {{FROM_NAME}} together, anticipation of something meaningful.</p>
+        <blockquote class="story">As the sun leaned low and the sky turned gold,<br/>The very best part of their story was about to unfold.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-19-bg.jpg</code>
+      <span class="slot-nums">x=140 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="20">
+    <header class="card-head">
+      <span class="page-no">20</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        <span class="badge dynamic">dynamic — Story climax</span>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 570, y 780, width 460, height 660 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="35.63" y="48.75" width="28.75" height="41.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">The emotional high point — the real story&#39;s payoff, {{SUBJECT_NAME}} and {{FROM_NAME}} together.</p>
+        <blockquote class="story">Because the very best love stories aren&#39;t the loud, big kind —<br/>They&#39;re the small true moments that stay in your mind.</blockquote>
+        <p class="hint">Text is personalised per buyer — the scene above is what stays fixed and must match the art.</p>
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-20-bg.jpg</code>
+      <span class="slot-nums">x=570 y=780 w=460 h=660</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="21">
+    <header class="card-head">
+      <span class="page-no">21</span>
+      <div class="badges">
+        <span class="badge pose">greeting</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 1100, y 920, width 360, height 520 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="68.75" y="57.5" width="22.5" height="32.5" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    <text x="50" y="9" text-anchor="middle" font-size="7" fill="var(--coral)">mirrored ⇋</text>
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A joyful celebratory scene — friends or family, warmth all around.</p>
+        <blockquote class="story">Everyone smiled — the whole room, it seemed! —<br/>For a story better than anyone had dreamed.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-21-bg.jpg</code>
+      <span class="slot-nums">x=1100 y=920 w=360 h=520</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="22">
+    <header class="card-head">
+      <span class="page-no">22</span>
+      <div class="badges">
+        <span class="badge pose">walking</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 670, y 1060, width 260, height 380 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="41.88" y="66.25" width="16.25" height="23.75" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">{{SUBJECT_NAME}} and {{FROM_NAME}} heading home together under an evening sky.</p>
+        <blockquote class="story">And as the stars blinked on, one by one by one,<br/>They headed home together — the day&#39;s adventure done.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-22-bg.jpg</code>
+      <span class="slot-nums">x=670 y=1060 w=260 h=380</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="23">
+    <header class="card-head">
+      <span class="page-no">23</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">A cosy evening in — {{SUBJECT_NAME}} settled in, content, warm light.</p>
+        <blockquote class="story">Curled up together, the evening winding down,<br/>{{FROM_NAME}} thought: what a wonderful person I&#39;ve found.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-23-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+
+  <article class="card" data-page="24">
+    <header class="card-head">
+      <span class="page-no">24</span>
+      <div class="badges">
+        <span class="badge pose">cozy</span>
+        
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="diagram" style="color: var(--coral-ink)">
+        
+  <svg viewBox="0 0 100 100" role="img" aria-label="On the 1600 by 1600 background, leave the area at x 540, y 700, width 520, height 740 open for the composited hero character.">
+    <rect x="1" y="1" width="98" height="98" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+    <rect x="33.75" y="43.75" width="32.5" height="46.25" rx="2"
+          fill="var(--coral)" fill-opacity="0.16"
+          stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="3 2.4"/>
+    
+  </svg>
+      </div>
+      <div class="scene">
+        <p class="scene-text">Final tender image — {{SUBJECT_NAME}} peaceful, warm, loved.</p>
+        <blockquote class="story">Because there&#39;s only one {{SUBJECT_NAME}} in the whole wide world,<br/>And every quirk and story is a flag they&#39;ve unfurled.<br/>Here&#39;s to you, {{SUBJECT_NAME}} — this book, this life, this view,<br/>{{FROM_NAME}} is endlessly grateful it&#39;s you.</blockquote>
+        
+      </div>
+    </div>
+
+    <footer class="card-foot">
+      <code>public/templates/couples-v1/page-24-bg.jpg</code>
+      <span class="slot-nums">x=540 y=700 w=520 h=740</span>
+    </footer>
+  </article>
+    </div>
+  </section>
+  </main>
+</div>
+
+<script>
+  const tabs = document.querySelectorAll(".tab");
+  const sections = document.querySelectorAll(".template");
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.toggle("active", t === tab));
+      sections.forEach((s) => {
+        s.hidden = s.id !== tab.dataset.target;
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+  sections.forEach((s, i) => { s.hidden = i !== 0; });
+</script>

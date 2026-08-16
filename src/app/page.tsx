@@ -1,11 +1,24 @@
 import { BookOpen, Sparkles, Star, Truck } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BookTypeCard } from "@/components/book-type-card";
 import { SectionHeading } from "@/components/section-heading";
 import { StarRating } from "@/components/star-rating";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { BOOK_TYPES } from "@/lib/products";
+import { BOOK_TYPES, type BookTypeId } from "@/lib/products";
+
+// Empty (character-free) background scenes for the floating hero cards —
+// generated for the pets template (see scripts/generate-fal-backgrounds.mjs)
+// but reused generically here as decorative texture, since they're just
+// uninhabited rooms/gardens, not tied to any one book type. Swap these once
+// kids/couples have their own generated backgrounds — see PLAN_003.md.
+const CARD_BG_SRC: Record<BookTypeId, string> = {
+  kids: "/templates/pets-v1/page-01-bg.jpg",
+  pets: "/templates/pets-v1/page-19-bg.jpg",
+  couples: "/templates/pets-v1/page-21-bg.jpg",
+};
+const ADD_CARD_BG_SRC = "/templates/pets-v1/page-15-bg.jpg";
 
 const TRUST_ITEMS = [
   { icon: Sparkles, label: "Written & illustrated just for them" },
@@ -91,27 +104,45 @@ export default function Home() {
                 <Link
                   key={book.id}
                   href={`/${book.slug}`}
-                  className="animate-float book-shadow flex aspect-[4/5] flex-col justify-between rounded-3xl border border-border bg-surface p-5 transition hover:-translate-y-1 hover:border-coral/40"
+                  className="animate-float book-shadow relative flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-3xl border border-border p-5 transition hover:-translate-y-1 hover:border-coral/40"
                   style={{
                     animationDelay: `${i * 0.6}s`,
                     marginTop: i === 1 ? "2.5rem" : i === 2 ? "-1.5rem" : 0,
                   }}
                 >
-                  <span className="text-4xl">{book.heroEmoji}</span>
-                  <div>
-                    <p className="font-display text-sm font-semibold text-ink">
+                  <Image
+                    src={CARD_BG_SRC[book.id]}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="220px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/5" />
+                  <span className="relative text-4xl drop-shadow-sm">
+                    {book.heroEmoji}
+                  </span>
+                  <div className="relative">
+                    <p className="font-display text-sm font-semibold text-white">
                       {book.name}
                     </p>
-                    <p className="text-xs text-ink-soft">{book.tagline}</p>
+                    <p className="text-xs text-white/85">{book.tagline}</p>
                   </div>
                 </Link>
               ))}
               <Link
                 href="/how-it-works"
-                className="animate-float flex aspect-[4/5] flex-col items-center justify-center gap-2 rounded-3xl border-2 border-dashed border-coral/40 bg-coral-soft/40 p-5 text-center transition hover:-translate-y-1 hover:border-coral/70"
+                className="animate-float relative flex aspect-[4/5] flex-col items-center justify-center gap-2 overflow-hidden rounded-3xl border-2 border-dashed border-coral/60 p-5 text-center transition hover:-translate-y-1 hover:border-coral"
               >
-                <span className="text-3xl">➕</span>
-                <p className="text-xs font-semibold text-coral-dark">
+                <Image
+                  src={ADD_CARD_BG_SRC}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="220px"
+                />
+                <div className="absolute inset-0 bg-coral-soft/70" />
+                <span className="relative text-3xl drop-shadow-sm">➕</span>
+                <p className="relative text-xs font-semibold text-ink">
                   Your story, next
                 </p>
               </Link>

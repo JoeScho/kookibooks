@@ -33,16 +33,24 @@ export interface BookType {
   tagline: string;
   blurb: string;
   heroEmoji: string;
+  // Used on the funnel landing page in place of heroEmoji. Ideally a real
+  // generated sample (background + composited hero character, see
+  // scripts/generate-fal-backgrounds.mjs and lib/composer.ts) — that's what
+  // pets uses. Where that doesn't exist yet, an empty (character-free)
+  // background is an acceptable stopgap (kids/couples currently do this);
+  // undefined falls back to the plain heroEmoji treatment.
+  heroImageSrc?: string;
   accent: "sun" | "mint" | "coral";
   targetLabel: string;
   subjectLabel: string; // what we call the "hero" of the book
   partnerLabel?: string; // second subject, e.g. loved one's name for couples
   traitPrompt: string; // heading shown above the details step / example cards
-  // "traits" mode: 3 short quirks, woven into a story we invent.
-  // "story" mode: one free-text anecdote, expanded into the story itself.
-  inputMode: "traits" | "story";
-  traitPlaceholder?: string; // traits mode only
-  storyPlaceholder?: string; // story mode only
+  // Every book type now collects both: a few short quirks/traits AND a
+  // free-text story, always about the illustrated subject (the loved one,
+  // for couples — not the buyer). A fixed 24-page story template (see
+  // lib/templates/) is adapted to weave both in — see lib/story-engine.ts.
+  traitPlaceholder: string;
+  storyPlaceholder: string;
   // "face" uses Flux PuLID for identity-locked human faces — it hard-fails
   // (no face detected) on anything without one, so non-human subjects need
   // "subject": a general image-to-image restyle instead (see lib/ai.ts).
@@ -60,22 +68,28 @@ export const BOOK_TYPES: BookType[] = [
     blurb:
       "A rhyming, illustrated adventure that turns your child's real name, favourite toy, and funniest habits into the hero of their own book.",
     heroEmoji: "🧸",
+    // No kids-specific art generated yet — reusing an empty (character-free)
+    // background from the pets template as a stopgap so the funnel page
+    // isn't just a flat colour + emoji. Swap for a real kids composite once
+    // that template has generated art — see PLAN_003.md.
+    heroImageSrc: "/templates/pets-v1/page-01-bg.jpg",
     accent: "sun",
     targetLabel: "For little ones",
     subjectLabel: "Child's name",
     traitPrompt: "What makes them, them?",
-    inputMode: "traits",
     illustrationMode: "face",
     traitPlaceholder: "e.g. forgets shoes, loves dinosaurs, hates broccoli",
+    storyPlaceholder:
+      "e.g. The time they insisted their stuffed dinosaur, Rex, needed his own seatbelt in the car — and wouldn't budge until he had one...",
     examplePrompts: [
       "Refuses to sleep without their pet dinosaur, Rex",
       "Thinks broccoli is secretly plotting against them",
       "Insists on wearing wellies indoors, rain or shine",
     ],
     steps: [
-      "Tell us their name and 3 quirks",
+      "Tell us their name, 3 quirks, and a real story",
       "Upload one clear photo",
-      "We write & illustrate a 10-page story",
+      "We weave it into a 24-page storybook",
       "Preview, tweak the words, and print",
     ],
   },
@@ -87,12 +101,13 @@ export const BOOK_TYPES: BookType[] = [
     blurb:
       "Ever wonder what's going through your dog's head when it barks at the vacuum? We write the story from your pet's perspective — chaos included.",
     heroEmoji: "🐾",
+    heroImageSrc: "/marketing/pets-hero.jpg",
     accent: "mint",
     targetLabel: "For pet parents",
     subjectLabel: "Pet's name",
-    traitPrompt: "Tell us a story about them",
-    inputMode: "story",
+    traitPrompt: "What makes them, them?",
     illustrationMode: "subject",
+    traitPlaceholder: "e.g. barks at the vacuum, steals socks, afraid of cats",
     storyPlaceholder:
       "e.g. Barkley is our very good, very silly black Labrador who firmly believes the vacuum cleaner is his mortal enemy — the second it comes out, he barks at it from the safety of behind the sofa...",
     examplePrompts: [
@@ -101,9 +116,9 @@ export const BOOK_TYPES: BookType[] = [
       "Their weirdly specific bedtime routine you've come to love",
     ],
     steps: [
-      "Tell us their name and one real story",
+      "Tell us their name, 3 quirks, and a real story",
       "Upload one clear photo",
-      "We expand it into a story from their POV",
+      "We turn it into a 24-page story from their POV",
       "Preview, tweak the words, and print",
     ],
   },
@@ -115,13 +130,16 @@ export const BOOK_TYPES: BookType[] = [
     blurb:
       "Tell us one real story about your loved one — an inside joke, a first-date disaster, the way they order coffee — and we'll expand it into a full illustrated storybook with that story as the heart of it.",
     heroEmoji: "💛",
+    // Same stopgap as kids — see the note there.
+    heroImageSrc: "/templates/pets-v1/page-21-bg.jpg",
     accent: "coral",
     targetLabel: "For couples",
     subjectLabel: "Your name",
     partnerLabel: "Your loved one's name",
-    traitPrompt: "Tell us a story about your loved one",
-    inputMode: "story",
+    traitPrompt: "What makes them, them?",
     illustrationMode: "face",
+    traitPlaceholder:
+      "e.g. narrates their own cooking show, terrible at parking, world's loudest sneeze",
     storyPlaceholder:
       "e.g. The time they tried to cook a fancy dinner for our anniversary and set off the smoke alarm twice, then ordered pizza and pretended that was the plan all along...",
     examplePrompts: [
@@ -130,9 +148,9 @@ export const BOOK_TYPES: BookType[] = [
       "Their weirdly specific morning routine you've come to love",
     ],
     steps: [
-      "Tell us both your names and one real story",
+      "Tell us both your names, 3 quirks, and a real story",
       "Upload a photo of your loved one",
-      "We expand it into a full illustrated storybook",
+      "We turn it into a full 24-page illustrated storybook",
       "Preview, tweak the words, and print",
     ],
   },

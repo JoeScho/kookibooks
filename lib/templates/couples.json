@@ -1,0 +1,343 @@
+{
+  "templateId": "couples-book-of-you-v1",
+  "bookType": "couples",
+  "titleTemplate": "The Book of {{SUBJECT_NAME}}, According to {{FROM_NAME}}",
+  "pages": [
+    {
+      "pageNumber": 1,
+      "sceneDescription": "{{SUBJECT_NAME}} in a warm, everyday home moment — making coffee, reading, ordinary morning charm.",
+      "baseImageAsset": "/templates/couples-v1/page-01-bg.jpg",
+      "textTemplate": "Once upon an ordinary morning, at home, at ease,\nWas {{SUBJECT_NAME}} — doing exactly as they please.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 2,
+      "sceneDescription": "{{SUBJECT_NAME}} going about their day, a small idiosyncratic habit visible.",
+      "baseImageAsset": "/templates/couples-v1/page-02-bg.jpg",
+      "textTemplate": "Now, {{FROM_NAME}} could tell you a thousand small things,\nAbout the particular joy that {{SUBJECT_NAME}} brings.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 3,
+      "sceneDescription": "{{SUBJECT_NAME}} paused mid-moment, about to do something characteristic and charming.",
+      "baseImageAsset": "/templates/couples-v1/page-03-bg.jpg",
+      "textTemplate": "But there's one story {{FROM_NAME}} tells again and again —\nThe one that explains, more than most, exactly when...",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-open"
+      }
+    },
+    {
+      "pageNumber": 4,
+      "sceneDescription": "{{SUBJECT_NAME}} heading out the door or into a scene, purposeful and warm.",
+      "baseImageAsset": "/templates/couples-v1/page-04-bg.jpg",
+      "textTemplate": "Because {{SUBJECT_NAME}} has a way of turning any old day,\nInto something worth telling, in their own particular way.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 5,
+      "sceneDescription": "Friends or family greeting {{SUBJECT_NAME}} warmly.",
+      "baseImageAsset": "/templates/couples-v1/page-05-bg.jpg",
+      "textTemplate": "Everyone who meets them ends up feeling the same —\nThat the world's a little brighter since {{SUBJECT_NAME}} came.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 6,
+      "sceneDescription": "{{SUBJECT_NAME}} pausing, thoughtful, noticing something small and lovely.",
+      "baseImageAsset": "/templates/couples-v1/page-06-bg.jpg",
+      "textTemplate": "{{FROM_NAME}} noticed it early — that particular knack,\nFor noticing beauty that others might overlook, or lack.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 7,
+      "sceneDescription": "A signature charming quirk moment in full swing.",
+      "baseImageAsset": "/templates/couples-v1/page-07-bg.jpg",
+      "textTemplate": "Because nobody does it quite like {{SUBJECT_NAME}} does —\nAnd that's exactly why this story deserves a round of applause.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 0
+      }
+    },
+    {
+      "pageNumber": 8,
+      "sceneDescription": "The warm ripple effect of the quirk — laughter, closeness.",
+      "baseImageAsset": "/templates/couples-v1/page-08-bg.jpg",
+      "textTemplate": "It wasn't perfect, it wasn't neat,\nBut it was {{SUBJECT_NAME}}'s most lovable feat.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 9,
+      "sceneDescription": "Friends gathered, laughing fondly, retelling the moment.",
+      "baseImageAsset": "/templates/couples-v1/page-09-bg.jpg",
+      "textTemplate": "'That's so them!' the whole room cried,\nWith so much love, and so much pride.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 10,
+      "sceneDescription": "A small everyday hiccup — a mix-up, a mishap.",
+      "baseImageAsset": "/templates/couples-v1/page-10-bg.jpg",
+      "textTemplate": "Then — a wobble! A moment gone slightly wrong!\nThe kind that becomes a favourite story before long.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 11,
+      "sceneDescription": "{{SUBJECT_NAME}} handling the mishap with their particular grace or humour.",
+      "baseImageAsset": "/templates/couples-v1/page-11-bg.jpg",
+      "textTemplate": "But {{SUBJECT_NAME}} handled it their own particular way,\nTurning a mishap into the best part of the day.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 12,
+      "sceneDescription": "A second, distinct signature quirk moment.",
+      "baseImageAsset": "/templates/couples-v1/page-12-bg.jpg",
+      "textTemplate": "And just when you'd think the story had run its course,\nOne more {{SUBJECT_NAME}}-ism came, right from the source.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 1
+      }
+    },
+    {
+      "pageNumber": 13,
+      "sceneDescription": "The warmth spreading — a shared laugh, a tender look.",
+      "baseImageAsset": "/templates/couples-v1/page-13-bg.jpg",
+      "textTemplate": "It turned an ordinary evening quite delightfully strange,\nIn the best possible, {{SUBJECT_NAME}}-shaped kind of way.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 14,
+      "sceneDescription": "A quiet tender moment — {{SUBJECT_NAME}} and {{FROM_NAME}} sitting close, soft light.",
+      "baseImageAsset": "/templates/couples-v1/page-14-bg.jpg",
+      "textTemplate": "For just one moment, the whole world went quiet,\nAnd there they sat, together, past the riot.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 15,
+      "sceneDescription": "{{SUBJECT_NAME}} setting off on a small adventure or outing.",
+      "baseImageAsset": "/templates/couples-v1/page-15-bg.jpg",
+      "textTemplate": "Then up they got, with a brand new plan,\nThe best kind of love always outruns a nap.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 16,
+      "sceneDescription": "{{SUBJECT_NAME}} out in a bigger scene — a walk, a trip, an outing.",
+      "baseImageAsset": "/templates/couples-v1/page-16-bg.jpg",
+      "textTemplate": "Further and further, hand in hand,\nTo see how much love one day could hold, unplanned.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 17,
+      "sceneDescription": "A third signature quirk moment, in the bigger outing setting.",
+      "baseImageAsset": "/templates/couples-v1/page-17-bg.jpg",
+      "textTemplate": "And it wouldn't be a proper {{SUBJECT_NAME}} story, not one bit,\nWithout one more quirk to go with it.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 2
+      }
+    },
+    {
+      "pageNumber": 18,
+      "sceneDescription": "A joyful triumphant beat — {{SUBJECT_NAME}} laughing, mid-moment.",
+      "baseImageAsset": "/templates/couples-v1/page-18-bg.jpg",
+      "textTemplate": "It was silly, it was warm, it was entirely their own —\nA {{SUBJECT_NAME}}-sized moment, for the whole world to be shown.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 19,
+      "sceneDescription": "Golden hour, {{SUBJECT_NAME}} and {{FROM_NAME}} together, anticipation of something meaningful.",
+      "baseImageAsset": "/templates/couples-v1/page-19-bg.jpg",
+      "textTemplate": "As the sun leaned low and the sky turned gold,\nThe very best part of their story was about to unfold.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 20,
+      "sceneDescription": "The emotional high point — the real story's payoff, {{SUBJECT_NAME}} and {{FROM_NAME}} together.",
+      "baseImageAsset": "/templates/couples-v1/page-20-bg.jpg",
+      "textTemplate": "Because the very best love stories aren't the loud, big kind —\nThey're the small true moments that stay in your mind.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-climax"
+      }
+    },
+    {
+      "pageNumber": 21,
+      "sceneDescription": "A joyful celebratory scene — friends or family, warmth all around.",
+      "baseImageAsset": "/templates/couples-v1/page-21-bg.jpg",
+      "textTemplate": "Everyone smiled — the whole room, it seemed! —\nFor a story better than anyone had dreamed.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 22,
+      "sceneDescription": "{{SUBJECT_NAME}} and {{FROM_NAME}} heading home together under an evening sky.",
+      "baseImageAsset": "/templates/couples-v1/page-22-bg.jpg",
+      "textTemplate": "And as the stars blinked on, one by one by one,\nThey headed home together — the day's adventure done.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 23,
+      "sceneDescription": "A cosy evening in — {{SUBJECT_NAME}} settled in, content, warm light.",
+      "baseImageAsset": "/templates/couples-v1/page-23-bg.jpg",
+      "textTemplate": "Curled up together, the evening winding down,\n{{FROM_NAME}} thought: what a wonderful person I've found.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 24,
+      "sceneDescription": "Final tender image — {{SUBJECT_NAME}} peaceful, warm, loved.",
+      "baseImageAsset": "/templates/couples-v1/page-24-bg.jpg",
+      "textTemplate": "Because there's only one {{SUBJECT_NAME}} in the whole wide world,\nAnd every quirk and story is a flag they've unfurled.\nHere's to you, {{SUBJECT_NAME}} — this book, this life, this view,\n{{FROM_NAME}} is endlessly grateful it's you.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    }
+  ]
+}

@@ -60,9 +60,8 @@ export function BookWizard({ book }: { book: BookType }) {
   const detailsValid =
     subjectName.trim().length > 1 &&
     (!book.partnerLabel || partnerName.trim().length > 1) &&
-    (book.inputMode === "story"
-      ? story.trim().length >= 20
-      : traits.some((t) => t.trim().length > 0));
+    traits.some((t) => t.trim().length > 0) &&
+    story.trim().length >= 20;
 
   function handleFileSelect(selected: File | null) {
     setFile(selected);
@@ -98,9 +97,8 @@ export function BookWizard({ book }: { book: BookType }) {
           subjectName: subjectName.trim(),
           partnerName: partnerName.trim() || undefined,
           narrativeStyle,
-          ...(book.inputMode === "story"
-            ? { story: story.trim() }
-            : { traits: traits.filter((t) => t.trim().length > 0) }),
+          traits: traits.filter((t) => t.trim().length > 0),
+          story: story.trim(),
           photoUrl: publicUrlData.publicUrl,
         }),
       });
@@ -199,51 +197,49 @@ export function BookWizard({ book }: { book: BookType }) {
             )}
           </div>
 
-          {book.inputMode === "story" ? (
-            <div>
-              <label
-                htmlFor="story"
-                className="mb-2 block text-sm font-medium text-ink"
-              >
-                Their story
-              </label>
-              <textarea
-                id="story"
-                value={story}
-                onChange={(e) => setStory(e.target.value)}
-                placeholder={book.storyPlaceholder}
-                rows={6}
-                className="w-full rounded-xl border border-border bg-cream p-4 text-sm outline-none focus:border-coral"
-              />
-              <p className="mt-1.5 text-xs text-ink-soft">
-                A paragraph or two is plenty — we'll do the rest. Need
-                inspiration? {book.examplePrompts[0]}
-              </p>
+          <div>
+            <span className="mb-2 block text-sm font-medium text-ink">
+              Three quirks or traits
+            </span>
+            <div className="flex flex-col gap-2">
+              {traits.map((trait, i) => (
+                <input
+                  key={TRAIT_KEYS[i]}
+                  value={trait}
+                  onChange={(e) => {
+                    const next = [...traits];
+                    next[i] = e.target.value;
+                    setTraits(next);
+                  }}
+                  placeholder={
+                    i === 0 ? book.traitPlaceholder : `Quirk ${i + 1}`
+                  }
+                  className="h-11 w-full rounded-xl border border-border bg-cream px-4 text-sm outline-none focus:border-coral"
+                />
+              ))}
             </div>
-          ) : (
-            <div>
-              <span className="mb-2 block text-sm font-medium text-ink">
-                Three quirks or traits
-              </span>
-              <div className="flex flex-col gap-2">
-                {traits.map((trait, i) => (
-                  <input
-                    key={TRAIT_KEYS[i]}
-                    value={trait}
-                    onChange={(e) => {
-                      const next = [...traits];
-                      next[i] = e.target.value;
-                      setTraits(next);
-                    }}
-                    placeholder={
-                      i === 0 ? book.traitPlaceholder : `Quirk ${i + 1}`
-                    }
-                    className="h-11 w-full rounded-xl border border-border bg-cream px-4 text-sm outline-none focus:border-coral"
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+          </div>
+
+          <div>
+            <label
+              htmlFor="story"
+              className="mb-2 block text-sm font-medium text-ink"
+            >
+              A real story about them
+            </label>
+            <textarea
+              id="story"
+              value={story}
+              onChange={(e) => setStory(e.target.value)}
+              placeholder={book.storyPlaceholder}
+              rows={6}
+              className="w-full rounded-xl border border-border bg-cream p-4 text-sm outline-none focus:border-coral"
+            />
+            <p className="mt-1.5 text-xs text-ink-soft">
+              A paragraph or two is plenty — we'll weave it into the book. Need
+              inspiration? {book.examplePrompts[0]}
+            </p>
+          </div>
 
           <div>
             <span className="mb-2 block text-sm font-medium text-ink">
@@ -345,11 +341,9 @@ export function BookWizard({ book }: { book: BookType }) {
               : "Writing and illustrating their story…"}
           </h2>
           <p className="max-w-sm text-sm text-ink-soft">
-            This usually takes about a minute. We're{" "}
-            {book.inputMode === "story"
-              ? "expanding their story into a book and painting"
-              : `weaving ${subjectName || "their"} quirks into a story and painting`}{" "}
-            each scene to match.
+            This usually takes about a minute. We're weaving{" "}
+            {illustratedName || "their"} quirks and story into the book and
+            illustrating every page to match.
           </p>
         </div>
       )}

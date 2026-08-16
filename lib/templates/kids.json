@@ -1,0 +1,343 @@
+{
+  "templateId": "kids-wonder-full-day-v1",
+  "bookType": "kids",
+  "titleTemplate": "{{SUBJECT_NAME}}'s Big Wonder-Full Day",
+  "pages": [
+    {
+      "pageNumber": 1,
+      "sceneDescription": "{{SUBJECT_NAME}} waking up in a cosy bedroom, sunlight streaming in, stretching and grinning at the day ahead.",
+      "baseImageAsset": "/templates/kids-v1/page-01-bg.jpg",
+      "textTemplate": "In a cosy little room where the morning light creeps in,\nLived {{SUBJECT_NAME}} — and the day was about to begin!",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 2,
+      "sceneDescription": "{{SUBJECT_NAME}} at the breakfast table, humming, looking thoughtfully out the window, planning the day.",
+      "baseImageAsset": "/templates/kids-v1/page-02-bg.jpg",
+      "textTemplate": "Some days start slow, with a yawn and a stretch,\nBut {{SUBJECT_NAME}}'s days always come with a fetch —\nSomething to wonder, something to find,\nA whole day of adventure, still left to unwind.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 3,
+      "sceneDescription": "{{SUBJECT_NAME}} pausing at the front door, hand on the handle, a hint of something exciting about to unfold.",
+      "baseImageAsset": "/templates/kids-v1/page-03-bg.jpg",
+      "textTemplate": "And today was no ordinary day at all,\nBecause something was about to happen — big or small.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-open"
+      }
+    },
+    {
+      "pageNumber": 4,
+      "sceneDescription": "{{SUBJECT_NAME}} striding down a garden path or street, backpack or toy in hand.",
+      "baseImageAsset": "/templates/kids-v1/page-04-bg.jpg",
+      "textTemplate": "Out the door and down the path, {{SUBJECT_NAME}} would go,\nWherever the wondering took them — fast or slow.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 5,
+      "sceneDescription": "Neighbours or friends waving hello as {{SUBJECT_NAME}} passes by.",
+      "baseImageAsset": "/templates/kids-v1/page-05-bg.jpg",
+      "textTemplate": "The whole street seemed to know their name,\nEvery wave and 'good morning!' was never quite the same.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 6,
+      "sceneDescription": "{{SUBJECT_NAME}} pausing curiously, peering around a corner or up at the sky.",
+      "baseImageAsset": "/templates/kids-v1/page-06-bg.jpg",
+      "textTemplate": "But {{SUBJECT_NAME}} had a feeling, right down in their toes,\nThat today held a secret nobody else knows.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 7,
+      "sceneDescription": "A signature quirky moment for {{SUBJECT_NAME}} in full swing — playful, a little silly, entirely them.",
+      "baseImageAsset": "/templates/kids-v1/page-07-bg.jpg",
+      "textTemplate": "Because {{SUBJECT_NAME}} was never quite like anyone else —\nAnd that's exactly why this story's worth itself.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 0
+      }
+    },
+    {
+      "pageNumber": 8,
+      "sceneDescription": "The joyful aftermath — toys scattered, laughter, a happy little mess.",
+      "baseImageAsset": "/templates/kids-v1/page-08-bg.jpg",
+      "textTemplate": "Wherever that led — however peculiar it seemed —\nIt turned an ordinary morning into something dreamed.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 9,
+      "sceneDescription": "Friends or family gathering round, delighted, laughing with {{SUBJECT_NAME}}.",
+      "baseImageAsset": "/templates/kids-v1/page-09-bg.jpg",
+      "textTemplate": "Friends came running when they heard the commotion,\n'That's so {{SUBJECT_NAME}}!' — with total devotion.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 10,
+      "sceneDescription": "{{SUBJECT_NAME}} looking at a small puzzle — a stuck door, a tangled kite string.",
+      "baseImageAsset": "/templates/kids-v1/page-10-bg.jpg",
+      "textTemplate": "Then — uh oh — a puzzle popped up out of nowhere,\nSomething tricky, something that needed some care.",
+      "pose": "curious",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 11,
+      "sceneDescription": "{{SUBJECT_NAME}} actively solving the puzzle, hands-on, determined and cheerful.",
+      "baseImageAsset": "/templates/kids-v1/page-11-bg.jpg",
+      "textTemplate": "But {{SUBJECT_NAME}} never once thought to give up,\nThey rolled up their sleeves and figured it up.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 12,
+      "sceneDescription": "A second, distinct signature quirky moment for {{SUBJECT_NAME}}.",
+      "baseImageAsset": "/templates/kids-v1/page-12-bg.jpg",
+      "textTemplate": "And just when you'd think the day had run out of surprise,\nAnother little {{SUBJECT_NAME}}-ism opened everyone's eyes.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 1
+      }
+    },
+    {
+      "pageNumber": 13,
+      "sceneDescription": "The ripple effect of the quirk spreading warmth and fun through the setting.",
+      "baseImageAsset": "/templates/kids-v1/page-13-bg.jpg",
+      "textTemplate": "It turned the afternoon quite delightfully strange,\nIn the best possible, {{SUBJECT_NAME}}-shaped kind of way.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 14,
+      "sceneDescription": "A tender quiet pause — {{SUBJECT_NAME}} sitting still, maybe with a pet or toy, soft light.",
+      "baseImageAsset": "/templates/kids-v1/page-14-bg.jpg",
+      "textTemplate": "For just one moment, the whole world went quiet,\nAnd {{SUBJECT_NAME}} sat still, in the hush after the riot.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 15,
+      "sceneDescription": "{{SUBJECT_NAME}} setting off again, energised, heading toward a bigger open space.",
+      "baseImageAsset": "/templates/kids-v1/page-15-bg.jpg",
+      "textTemplate": "Then up they popped, with a brand new plan,\nThe best adventures always outrun a nap!",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 16,
+      "sceneDescription": "{{SUBJECT_NAME}} exploring a bigger outdoor scene — trees, a stream, or a hill.",
+      "baseImageAsset": "/templates/kids-v1/page-16-bg.jpg",
+      "textTemplate": "Further and further, past the garden gate,\nTo see how much wonder one day could hold, at any rate.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 17,
+      "sceneDescription": "A third signature quirky moment, in this bigger outdoor setting.",
+      "baseImageAsset": "/templates/kids-v1/page-17-bg.jpg",
+      "textTemplate": "And it wouldn't be a proper {{SUBJECT_NAME}} day, not one bit,\nWithout one more quirk to go with it.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "trait",
+        "traitIndex": 2
+      }
+    },
+    {
+      "pageNumber": 18,
+      "sceneDescription": "A triumphant beat — {{SUBJECT_NAME}} celebrating mid-action, arms up or laughing.",
+      "baseImageAsset": "/templates/kids-v1/page-18-bg.jpg",
+      "textTemplate": "It was silly, it was brave, it was entirely their own —\nA {{SUBJECT_NAME}}-sized moment, for the whole world to be shown.",
+      "pose": "playing",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 19,
+      "sceneDescription": "Golden-hour scene, {{SUBJECT_NAME}} and loved ones gathering, anticipation building.",
+      "baseImageAsset": "/templates/kids-v1/page-19-bg.jpg",
+      "textTemplate": "As the sun leaned low and the sky turned gold,\nThe very best part of the day was about to unfold.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 140,
+        "y": 920,
+        "width": 360,
+        "height": 520
+      }
+    },
+    {
+      "pageNumber": 20,
+      "sceneDescription": "The emotional high point — {{SUBJECT_NAME}} at the centre of a warm, specific real moment.",
+      "baseImageAsset": "/templates/kids-v1/page-20-bg.jpg",
+      "textTemplate": "Because the very best stories aren't the loud, big kind —\nThey're the small true moments that stay in your mind.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 570,
+        "y": 780,
+        "width": 460,
+        "height": 660
+      },
+      "dynamic": {
+        "anchor": "story-climax"
+      }
+    },
+    {
+      "pageNumber": 21,
+      "sceneDescription": "A joyful gathering — friends and family cheering, celebratory.",
+      "baseImageAsset": "/templates/kids-v1/page-21-bg.jpg",
+      "textTemplate": "Everyone cheered — the whole street, it seemed! —\nFor a day that turned out better than {{SUBJECT_NAME}} had dreamed.",
+      "pose": "greeting",
+      "compositeSlot": {
+        "x": 1100,
+        "y": 920,
+        "width": 360,
+        "height": 520,
+        "flip": true
+      }
+    },
+    {
+      "pageNumber": 22,
+      "sceneDescription": "{{SUBJECT_NAME}} walking home under a dusky, starry sky.",
+      "baseImageAsset": "/templates/kids-v1/page-22-bg.jpg",
+      "textTemplate": "And as the stars blinked on, one by one by one,\n{{SUBJECT_NAME}} headed home — the day's work was done.",
+      "pose": "walking",
+      "compositeSlot": {
+        "x": 670,
+        "y": 1060,
+        "width": 260,
+        "height": 380
+      }
+    },
+    {
+      "pageNumber": 23,
+      "sceneDescription": "{{SUBJECT_NAME}} in bed, cosy, smiling sleepily, maybe hugging a toy.",
+      "baseImageAsset": "/templates/kids-v1/page-23-bg.jpg",
+      "textTemplate": "Pyjamas on, teeth brushed, tucked in tight,\n{{SUBJECT_NAME}} looked back on a truly wonder-full night.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    },
+    {
+      "pageNumber": 24,
+      "sceneDescription": "Final goodnight image — {{SUBJECT_NAME}} peacefully asleep, moonlight, warm and cosy.",
+      "baseImageAsset": "/templates/kids-v1/page-24-bg.jpg",
+      "textTemplate": "Because there's only one you in the whole wide world,\nAnd every quirk and story is a flag you've unfurled.\nGoodnight, {{SUBJECT_NAME}} — sweet dreams, sleep tight,\nTomorrow's another wonder-full day in sight.",
+      "pose": "cozy",
+      "compositeSlot": {
+        "x": 540,
+        "y": 700,
+        "width": 520,
+        "height": 740
+      }
+    }
+  ]
+}
